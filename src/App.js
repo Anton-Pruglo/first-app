@@ -1,25 +1,78 @@
-import logo from './logo.svg';
+
+import React, {Component} from "react";
 import './App.css';
+import TodoList from "./TodoList/TodoList";
+import TodoForm from "./TodoForm/TodoForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            todos: [
+                {
+                    id: 1,
+                    text: 'Сделать TodoList',
+                    isDone: false,
+                },
+                {
+                    id: 2,
+                    text: 'Снова сделать TodoList',
+                    isDone: false,
+                },
+                {
+                    id: 3,
+                    text: 'Опять сделать TodoList',
+                    isDone: false,
+                },
+                {
+                    id: 4,
+                    text: 'Фффф как сложно',
+                    isDone: false,
+                },
+                {
+                    id: 5,
+                    text: 'Я устал',
+                    isDone: false,
+                },
+                {
+                    id: 6,
+                    text: 'Ееее сделал!!!',
+                    isDone: false,
+                },
+            ],
+        };
+    }
+
+    toggleTodo = (index) => {
+        const { todos } = this.state;
+        const newTodos = [...todos];
+
+        newTodos[index] = {
+            ...todos[index],
+            isDone: !todos[index].isDone,
+        };
+
+        this.setState({
+            todos: newTodos,
+        });
+    };
+
+    addTodo = (todo) => {
+        const { todos } = this.state;
+        this.setState({
+            todos: [todo, ...todos],
+        });
+    };
+
+    render() {
+        const { todos } = this.state;
+        return (
+            <article className='todoApp'>
+                <TodoForm  onSubmit={this.addTodo}/>
+                <TodoList todos={todos} toggleTodo={this.toggleTodo}/>
+            </article>
+        )
+    }
 }
-
 export default App;
