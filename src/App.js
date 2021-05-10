@@ -9,6 +9,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            items: [],
             todos: [
                 {
                     id: 1,
@@ -65,12 +66,24 @@ class App extends Component {
         });
     };
 
+    // changeItem =
+    deleteItem = (id) => {
+        const filteredItems = this.state.todos.filter(todo => todo.id !== id)
+        this.setState({
+            todos: filteredItems
+        })
+    }
+
     render() {
         const { todos } = this.state;
         return (
             <article className='todoApp'>
                 <TodoForm  onSubmit={this.addTodo}/>
-                <TodoList todos={todos} toggleTodo={this.toggleTodo}/>
+                <TodoList
+                    todos={todos}
+                    toggleTodo={this.toggleTodo}
+                    deleteItem={this.deleteItem}
+                />
             </article>
         )
     }
