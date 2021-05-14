@@ -1,6 +1,7 @@
 
 import React, {Component} from "react";
 import './App.css';
+import './index.css';
 import TodoList from "./TodoList/TodoList";
 import TodoForm from "./TodoForm/TodoForm";
 
@@ -9,8 +10,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: [],
-            todos: [
+             todos: [
                 {
                     id: 1,
                     text: 'Сделать TodoList',
@@ -66,13 +66,24 @@ class App extends Component {
         });
     };
 
-    // changeItem =
     deleteItem = (id) => {
-        const filteredItems = this.state.todos.filter(todo => todo.id !== id)
+        const { todos } = this.state;
+        const filteredItems = todos.filter(todo => todo.id !== id)
         this.setState({
             todos: filteredItems
         })
     }
+
+    editItem = (id, value) => {
+        const { todos } = this.state;
+        const newItem = todos.map((todo) => {
+           if (todo.id !== id) {
+                return todo;
+           }
+           return { ...todo, text: value };
+       });
+       this.setState({ todos: newItem });
+    };
 
     render() {
         const { todos } = this.state;
@@ -83,6 +94,8 @@ class App extends Component {
                     todos={todos}
                     toggleTodo={this.toggleTodo}
                     deleteItem={this.deleteItem}
+                    onSubmit={this.addTodo}
+                    editItem={this.editItem}
                 />
             </article>
         )

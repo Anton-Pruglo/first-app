@@ -8,7 +8,6 @@ class TodoForm extends Component {
            value: '',
         };
     }
-
     onChangeHandler = (e) => {
         const { target: { value } } = e;
         this.setState({
@@ -35,7 +34,7 @@ class TodoForm extends Component {
                 <input
                     name={'todo'}
                     type={'text'}
-                    value={this.state.value}
+                    value={value}
                     placeholder={'todo text'}
                     onChange={this.onChangeHandler}
                 />

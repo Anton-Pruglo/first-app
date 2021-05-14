@@ -3,15 +3,15 @@ import TodoListItem from "../TodoListItem/TodoListItem";
 
 
 function TodoList(props) {
-    const { todos, toggleTodo, deleteItem} = props;
-    // const activeTask = todos.filter(task => task.isDone === false);
-    // const doneTask = todos.filter(task => task.isDone === true);
-    const todoListItems =/*[...activeTask,...doneTask]*/todos.map((todo, index) => (
+    const { todos, toggleTodo, deleteItem, onSubmit, editItem} = props;
+    const todoListItems =todos.map((todo, index) => (
         <TodoListItem
             key={todo.id}
             todo={todo}
             onToggleTodo={() => toggleTodo(index)}
             deleteItem={() => deleteItem(todo.id)}
+            onSubmit={onSubmit}
+            editItem={editItem}
         />
     ));
     return (
