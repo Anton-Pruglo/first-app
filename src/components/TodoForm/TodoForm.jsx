@@ -1,7 +1,7 @@
 import React, {Component} from "react";
+import "./index.css";
 
-
-class TodoForm extends Component {
+export class TodoForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,4 +43,3 @@ class TodoForm extends Component {
         );
     }
 }
-export default TodoForm;

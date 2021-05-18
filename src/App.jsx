@@ -2,8 +2,8 @@
 import React, {Component} from "react";
 import './App.css';
 import './index.css';
-import TodoList from "./TodoList/TodoList";
-import TodoForm from "./TodoForm/TodoForm";
+import {TodoList} from "./components/TodoList";
+import {TodoForm} from "./components/TodoForm";
 
 
 class App extends Component {
@@ -66,23 +66,23 @@ class App extends Component {
         });
     };
 
-    deleteItem = (id) => {
+    deleteTodo = (index) => {
         const { todos } = this.state;
-        const filteredItems = todos.filter(todo => todo.id !== id)
+        const newTodos = [...todos];
+        newTodos.splice(index,1);
         this.setState({
-            todos: filteredItems
+            todos: newTodos,
         })
     }
 
-    editItem = (id, value) => {
+    editTodo = (index, text) => {
         const { todos } = this.state;
-        const newItem = todos.map((todo) => {
-           if (todo.id !== id) {
-                return todo;
-           }
-           return { ...todo, text: value };
-       });
-       this.setState({ todos: newItem });
+        const newTodos = [...todos]
+        newTodos[index] = {
+            ...todos[index],
+            text,
+        }
+       this.setState({ todos: newTodos });
     };
 
     render() {
@@ -92,10 +92,10 @@ class App extends Component {
                 <TodoForm  onSubmit={this.addTodo}/>
                 <TodoList
                     todos={todos}
-                    toggleTodo={this.toggleTodo}
-                    deleteItem={this.deleteItem}
-                    onSubmit={this.addTodo}
-                    editItem={this.editItem}
+                    onToggleTodo={this.toggleTodo}
+                    onDeleteTodo={this.deleteTodo}
+                    onAdd={this.addTodo}
+                    onEditTodo={this.editTodo}
                 />
             </article>
         )
