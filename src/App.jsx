@@ -69,7 +69,7 @@ class App extends Component {
     deleteTodo = (index) => {
         const { todos } = this.state;
         const newTodos = [...todos];
-        newTodos.splice(index,1);
+        newTodos.splice(index, 1);
         this.setState({
             todos: newTodos,
         })
